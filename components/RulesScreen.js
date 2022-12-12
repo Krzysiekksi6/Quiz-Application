@@ -8,11 +8,17 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-import {Modal, Portal, Provider} from 'react-native-paper';
+import {Modal, Portal, Provider, Button} from 'react-native-paper';
 
-const RulesScreen = (props) => {
+const RulesScreen = ({navigation: {navigate}}) => {
   const [visible, setVisible] = React.useState(true);
   const hideModal = () => setVisible(false);
+
+  const handleSubmit = async () => {
+    await AsyncStorage.setItem('@storage_Key', 'rules')
+    navigate('QuizApp');
+    hideModal();
+  };
 
   const containerStyle = {backgroundColor: 'white', padding: 20};
 
@@ -23,7 +29,9 @@ const RulesScreen = (props) => {
           visible={visible}
           onDismiss={hideModal}
           contentContainerStyle={containerStyle}>
-          <Text style={{margin: 10,textAlign: 'center', fontWeight: 'bold'}}>Regulamin</Text>
+          <Text style={{margin: 10, textAlign: 'center', fontWeight: 'bold'}}>
+            Regulamin
+          </Text>
           <Text>
             Niniejszy regulamin określa warunki konkursu organizowanego w ramach
             audycji pod tytułem „Milionerzy”, zwany dalej „Regulaminem”. 2.
@@ -32,6 +40,9 @@ const RulesScreen = (props) => {
             Konkursu w takich odcinkach Organizator ustali w odrębnym
             regulaminie.
           </Text>
+          <Button style={{marginTop: 30}} onPress={handleSubmit}>
+            Accept
+          </Button>
         </Modal>
       </Portal>
     </Provider>

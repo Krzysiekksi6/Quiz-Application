@@ -30,6 +30,8 @@ const App = () => {
     SplashScreen.hide();
   }, []);
 
+  
+
   const DrawerNavigator = () => {
     return (
       <Drawer.Navigator>
@@ -40,19 +42,22 @@ const App = () => {
     );
   };
 
-  const visible = false;
 
-  const getInitialPage = async () => {
-    if (visible) {
-      return 'Rules';
+
+  const getInitialPage  = async () => {
+    // const showTerms = await AsyncStorage.getItem('terms');
+    //     if (showTerms) return 'QuizApp';
+    const value = await AsyncStorage.getItem('@storage_Key')
+    if(value === null || value !== 'rules') {
+      return "Rules"
     } else {
-      return 'QuizApp';
+      return "QuizApp"
     }
   };
 
   return (
     <NavigationContainer>
-      <RootStack.Navigator initialRouteName={getInitialPage}>
+      <RootStack.Navigator initialRouteName={getInitialPage()}>
         <RootStack.Screen
           name="QuizApp"
           component={DrawerNavigator}
