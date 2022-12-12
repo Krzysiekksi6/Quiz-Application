@@ -15,7 +15,6 @@ import {Card} from 'react-native-elements';
 import {TESTS} from '../models/testItem';
 
 
-
 const HomeScreen = ({navigation}) => {
   const onPressChangeScreen = () => {
     navigation.navigate('Results')
@@ -35,6 +34,7 @@ const HomeScreen = ({navigation}) => {
   };
   return (
     <View style={styles.homeScreen}>
+      
       <FlatList
         data={TESTS}
         keyExtractor={item => item.id}
