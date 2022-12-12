@@ -7,11 +7,30 @@ import {
   Text,
   useColorScheme,
   View,
+  RefreshControl
 } from 'react-native';
 import { DataTable } from 'react-native-paper';
+
+const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  }
+
 const ResultsScreen = () => {
+    const [refreshing, setRefreshing] = React.useState(false);
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        wait(2000).then(() => setRefreshing(false));
+      }, []);
+
+
     return(
         <View style={{backgroundColor: "#92868F", flex: 1}}>
+            <ScrollView refreshControl={
+                <RefreshControl refreshing={refreshing}
+                onRefresh={onRefresh}
+                />
+            }>
         <DataTable>
             <DataTable.Header style={styles.header}>
                 <DataTable.Title><Text style={styles.headerText}>Nick</Text></DataTable.Title>
@@ -44,6 +63,7 @@ const ResultsScreen = () => {
                 <DataTable.Cell><Text style={styles.fontColor}>01.08.1944</Text></DataTable.Cell>
             </DataTable.Row>
         </DataTable>
+        </ScrollView>
         </View>
     );
 }
