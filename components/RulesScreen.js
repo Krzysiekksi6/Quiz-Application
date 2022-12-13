@@ -7,27 +7,54 @@ import {
   Text,
   useColorScheme,
   View,
+  Alert
+  
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Modal, Portal, Provider, Button} from 'react-native-paper';
 
-const RulesScreen = ({navigation: {navigate}}) => {
+const RulesScreen = ({navigation}) => {
   const [visible, setVisible] = React.useState(true);
-  const hideModal = () => setVisible(false);
+  // const hideModal = () => setVisible(false);
 
-  const handleSubmit = async () => {
-    await AsyncStorage.setItem('@storage_Key', 'rules')
-    navigate('QuizApp');
-    hideModal();
-  };
+  
+  const getData = async() => {
+    try {
+
+      await AsyncStorage.getItem('@storage_Key').then (value => {
+        if (value != null) {
+          navigation.navigate('Home')
+        }
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  
+  }
+    const handleSubmit = () => {
+      // setVisible(false);
+      try {
+        AsyncStorage.setItem('@storage_Key', 'rules')
+      } catch (e) {
+        console.log(e);
+      }
+      // hideModal();
+      navigation.navigate('Home');
+    };
+
 
   const containerStyle = {backgroundColor: 'white', padding: 20};
+
+  React.useEffect(() => {
+    getData();
+  },[])
 
   return (
     <Provider>
       <Portal>
         <Modal
           visible={visible}
-          onDismiss={hideModal}
+          
           contentContainerStyle={containerStyle}>
           <Text style={{margin: 10, textAlign: 'center', fontWeight: 'bold'}}>
             Regulamin

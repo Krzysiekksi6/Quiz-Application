@@ -16,6 +16,10 @@ import {TESTS} from '../models/testItem';
 
 
 const HomeScreen = ({navigation}) => {
+
+
+
+
   const onPressChangeScreen = () => {
     navigation.navigate('Results')
   };
@@ -32,6 +36,8 @@ const HomeScreen = ({navigation}) => {
       </Card>
     );
   };
+
+
   return (
     <View style={styles.homeScreen}>
       
