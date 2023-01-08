@@ -19,6 +19,7 @@ import HomeScreen from './components/HomeScreen';
 import TestScreen from './components/TestScreen';
 import ResultsScreen from './components/ResultsScreen';
 import RulesScreen from './components/RulesScreen';
+import RandomTest from './components/RandomTest'
 
 const App = () => {
   // Declare Navigation Drawer
@@ -31,21 +32,32 @@ const App = () => {
 
 
 
-
   const DrawerNavigator = () => {
-    
     return (
       <Drawer.Navigator>
-        <Drawer.Screen name="Rules" component={RulesScreen} />
+        <Drawer.Screen
+          name="Rules"
+          component={RulesScreen}
+          options={{
+            drawerItemStyle: {display: 'none'},
+            swipeEnabled: false,
+            headerShown: false,
+          }}
+        />
         <Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="Test" component={TestScreen} />
+        <Drawer.Screen name="Test" component={TestScreen} 
+        options={{
+          drawerItemStyle: {display: 'none'},
+          swipeEnabled: false,
+          headerShown: false,
+        }}
+        />
         <Drawer.Screen name="Results" component={ResultsScreen} />
+        <Drawer.Screen name="Random Test" component={RandomTest} />
+        <Drawer.Screen name="Download Tests" component={ResultsScreen} />
       </Drawer.Navigator>
     );
   };
-
-
-
 
   return (
     <NavigationContainer>
@@ -55,7 +67,6 @@ const App = () => {
           component={DrawerNavigator}
           options={{headerShown: false}}
         />
-       
       </RootStack.Navigator>
     </NavigationContainer>
   );
@@ -76,10 +87,10 @@ options={{headerShown: false}}
 /> */
 }
 
-
-
- {/* {getInitialPage() ? (
+{
+  /* {getInitialPage() ? (
           <RootStack.Screen name="QuizApp" component={DrawerNavigator} options={{headerShown: false}} />
         ) : (
           <RootStack.Screen name="Rules" component={RulesScreen} options={{headerShown: false}} />
-        )} */}
+        )} */
+}

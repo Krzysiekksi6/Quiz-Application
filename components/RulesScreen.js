@@ -15,7 +15,7 @@ import {Modal, Portal, Provider, Button} from 'react-native-paper';
 
 const RulesScreen = ({navigation}) => {
   const [visible, setVisible] = React.useState(true);
-  // const hideModal = () => setVisible(false);
+  const hideModal = () => setVisible(false);
 
   
   const getData = async() => {
@@ -35,6 +35,7 @@ const RulesScreen = ({navigation}) => {
       // setVisible(false);
       try {
         AsyncStorage.setItem('@storage_Key', 'rules')
+        hideModal()
       } catch (e) {
         console.log(e);
       }
